@@ -1,0 +1,54 @@
+Convert Sorted List To BST
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    List<Integer> li = new ArrayList<>();
+    public TreeNode sortedListToBST(ListNode head) 
+    {
+        while(head!=null)
+        {
+            li.add(head.val);
+            head=head.next;
+        }
+        int a[]= new int [li.size()];
+        for(int i =0 ; i< a.length; i++)
+            a[i]= li.get(i);
+
+        TreeNode ans =builtBST(a, 0, a.length-1);
+        return ans;
+    }
+    public TreeNode builtBST(int a[], int s , int e)
+    {
+        if(s>e)
+            return null;
+        int mid=(s+e)/2;
+        TreeNode root = new TreeNode(a[mid]);
+        root.left= builtBST(a, s, mid-1);
+        root.right= builtBST(a, mid+1, e);
+        return root;
+    }
+}
