@@ -1,0 +1,145 @@
+101. Symmetric Tree
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+  public boolean isSymmetric(TreeNode root) {
+        if(root==null) return true ;
+        Stack<TreeNode> s = new Stack<>();
+        s.push(root.left);
+        s.push(root.right);
+        while(!s.isEmpty())
+        {
+            TreeNode ln = s.pop();
+            TreeNode rn = s.pop();
+            if( ln==null && rn==null )
+                continue;
+
+            if( ln==null || rn==null || ln.val!=rn.val )
+                return false;
+
+            s.push(ln.left);
+            s.push(rn.right);
+            s.push(ln.right);
+            s.push(rn.left);
+        }
+        return true;
+    }
+}
+                    //OR
+
+//     public boolean isSymmetric(TreeNode root) {
+//         return isTreeSymmetric(root.left, root.right);
+//     }
+//     public boolean isTreeSymmetric(TreeNode leftRoot, TreeNode rightRoot){
+//         if(leftRoot == null && rightRoot == null)
+//             return true;
+//         if((leftRoot == null && rightRoot != null)  || (leftRoot != null && rightRoot == null))
+//             return false;
+//         if(leftRoot.val != rightRoot.val)
+//             return false;
+
+//         boolean a= isTreeSymmetric(leftRoot.left, rightRoot.right);
+//         boolean b = isTreeSymmetric(leftRoot.right,rightRoot.left);
+//         return a&&b;
+//     }
+// }
+    
+
+
+
+    // DOUBT  ye program kyu nahi chal rha 
+//     public boolean isSymmetric(TreeNode root) {
+//         TreeNode Root = Mirror(root);
+//         return isEqual(root, Root);
+//     }
+//     public TreeNode Mirror(TreeNode root)
+//     {
+//         if(root == null )
+//             return root;
+//         TreeNode left = Mirror(root.left);
+//         TreeNode right = Mirror(root.right);
+//         root.left = left;
+//         root.right = right; 
+//         return root;
+//     }
+//     public boolean isEqual( TreeNode root1, TreeNode root2)
+//     {
+//         if( root1==null && root2==null)
+//             return true;
+//         if( root1==null && root2!=null )
+//             return false;
+//         if( root1!=null && root2==null )
+//             return false;
+//         if( root1.val!=root2.val)
+//             return false;
+        
+//         boolean a = isEqual(root1.left, root2.left);
+//         boolean b = isEqual(root1.right, root2.right);
+//         if(!a) return false;
+//         if(!b) return false;
+
+//         return true;
+//     }
+// }
+
+
+          // Doubt
+//         if( root == null )
+//             return true;
+//         Queue<TreeNode> q = new LinkedList<>();
+//         q.add(root); 
+//         while(!q.isEmpty())
+//         {
+//             int lvl = q.size();
+//             for( int i =0; i<lvl; i++)
+//             {
+//                TreeNode curr = q.poll();
+//                 if(curr.left!=null)
+//                     q.add(curr.left);
+//                 if(curr.right!= null)
+//                     q.add(curr.right);
+//             }
+//             if(!isPalin(q))
+//             {
+//                 return false;
+//             }
+//         }
+//         return true;
+//     }
+//     public boolean isPalin(Queue<TreeNode> q)
+//     {
+//         int num=0;
+//         while(q.isEmpty()==false)
+//         {
+//             TreeNode curr = q.remove();
+//             num= num*10 + curr.val;
+//         }
+//         int n=num; int sum= 0;int ld=0;
+//         while(n!=0)
+//         {
+//             ld=n%10;
+//             sum= sum*10 +ld;
+//             n/=10;
+//         }
+//         if(num==sum)
+//         {
+//             return true;
+//         }else{
+//             return false;
+//         }
+//     }
+// }
